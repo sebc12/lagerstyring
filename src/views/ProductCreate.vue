@@ -59,7 +59,7 @@ const addProduct = () => {
   }
 
   axios
-    .post("http://127.0.0.1:8000/api/product", {
+    .post("http://127.0.0.1:8000/api/create-product", {
       ProductID: ProductID.value,
       ProductName: ProductName.value,
       Price: Price.value,
@@ -68,7 +68,6 @@ const addProduct = () => {
     })
     .then((response) => {
       console.log("Product added successfully:", response.data);
-      // Optionally, you can reset the form or perform other actions
       clearForm();
       message.success = true;
     })

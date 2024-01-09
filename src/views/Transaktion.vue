@@ -76,7 +76,6 @@ const transaktion = () => {
     })
     .then((response) => {
       console.log("Product added successfully:", response.data);
-      // Optionally, you can reset the form or perform other actions
       message.success = true;
     })
     .catch((error) => {

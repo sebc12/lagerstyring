@@ -13,7 +13,7 @@ type Inventory = {
   InventoryID: number;
   LocationID: string;
   Quantity: number;
-  location: Location; // Corrected type
+  location: Location;
 };
 
 type ProductDetails = {
@@ -50,18 +50,6 @@ const closeModal = () => {
   isModalOpen.value = false;
   selectedProduct.value = null;
 };
-
-/*
-const hasProductDetails = (product: Product) =>
-  product.details && product.details.length > 0;
-
-const getProductColor = (product: Product) =>
-  hasProductDetails(product)
-    ? product.details[0].inventory.location.LocationName
-    : "";
-
-const getProductStorage = (product: Product) =>
-  hasProductDetails(product) ? product.details[0].inventory.LocationID : ""; */
 
 const resetInput = () => {
   searchIdQuery.value = "";
@@ -136,6 +124,9 @@ const search = () => {
           >
             Søg
           </button>
+          <p v-if="message.error" class="text-[#FC3193] m-auto">
+            Produkt ikke fundet
+          </p>
         </div>
 
         <table
@@ -152,7 +143,6 @@ const search = () => {
           </thead>
           <tbody>
             <tr @click="openModal(product)" v-for="product in products">
-              <!-- Display basic details in the row -->
               <td>{{ product.ProductID }}</td>
               <td>{{ product.ProductName }}</td>
               <td>{{ product.Price }}</td>
@@ -175,7 +165,6 @@ const search = () => {
                     </div>
                     <div class="p-3">
                       <div v-if="selectedProduct" class="modal">
-                        <!-- Modal content -->
                         <div>
                           <div
                             class="flex flex-col lg:flex-row items-center justify-center text-2xl mb-10"
