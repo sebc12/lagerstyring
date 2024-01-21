@@ -33,6 +33,11 @@ const router = useRouter();
         :to="{ name: 'createProduct' }"
         >Create Product</router-link
       >
+      <router-link
+        @click="store.sidebarIsOpen = false"
+        :to="{ name: 'rapport' }"
+        >Rapport</router-link
+      >
     </div>
   </div>
 </template>

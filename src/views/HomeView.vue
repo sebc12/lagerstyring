@@ -4,24 +4,24 @@ import { reactive, ref } from "vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Menu from "@/components/Menu.vue";
 
-type Location = {
+interface Location {
   LocationID: number;
   LocationName: string;
-};
+}
 
-type Inventory = {
+interface Inventory {
   InventoryID: number;
   LocationID: string;
   Quantity: number;
   location: Location;
-};
+}
 
-type ProductDetails = {
+interface ProductDetails {
   SerialNumber: string;
   inventory: Inventory;
-};
+}
 
-type Product = {
+interface Product {
   ProductID: number;
   ProductName: string;
   Price: number;
@@ -29,7 +29,7 @@ type Product = {
   Storage: number;
   details: ProductDetails[];
   inventory: Inventory;
-};
+}
 
 const isModalOpen = ref(false);
 const selectedProduct = ref<Product | null>(null);
@@ -193,7 +193,6 @@ const search = () => {
                             <div
                               class="flex justify-center gap-10 mb-5 text-2xl"
                               v-for="detail in selectedProduct.details"
-                              :key="detail.SerialNumber"
                             >
                               <p class="border">
                                 Serial Number:

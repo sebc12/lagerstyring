@@ -4,6 +4,8 @@ import ProductCreate from "@/views/ProductCreate.vue";
 import NewStock from "@/views/NewStock.vue";
 import Transaktion from "@/views/Transaktion.vue";
 import Sidebar from "@/components/Sidebar.vue";
+import Rapport from "@/views/Rapport.vue";
+import Signup from "@/views/Signup.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +29,16 @@ const router = createRouter({
       path: "/transaktion",
       name: "transaktion",
       component: Transaktion,
+    },
+    {
+      path: "/rapport",
+      name: "rapport",
+      component: Rapport,
+    },
+    {
+      path: "/signup",
+      name: "signup",
+      component: Signup,
     },
     {
       path: "/sidebar",
