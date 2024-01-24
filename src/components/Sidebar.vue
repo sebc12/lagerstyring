@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { store } from "@/stores/menu";
+import Logout from "../components/Logout.vue";
 
 const router = useRouter();
 </script>
@@ -26,7 +27,7 @@ const router = useRouter();
       <router-link
         @click="store.sidebarIsOpen = false"
         :to="{ name: 'transaktion' }"
-        >Transaction</router-link
+        >Transfer</router-link
       >
       <router-link
         @click="store.sidebarIsOpen = false"
@@ -36,8 +37,10 @@ const router = useRouter();
       <router-link
         @click="store.sidebarIsOpen = false"
         :to="{ name: 'rapport' }"
-        >Rapport</router-link
+        class="mb-24"
+        >Report</router-link
       >
+      <logout class="text-xl" />
     </div>
   </div>
 </template>

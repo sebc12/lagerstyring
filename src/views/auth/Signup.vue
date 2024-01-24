@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import axios from "axios";
 import { ref } from "vue";
+import router from "@/router";
 
 const email = ref("");
 const password = ref("");
@@ -9,7 +10,7 @@ const message = ref("");
 
 const signup = () => {
   axios
-    .post("http://127.0.0.1:8000/api/signup", {
+    .post("http://127.0.0.1:8000/api/register", {
       email: email.value,
       password: password.value,
       LocationID: LocationID.value,
@@ -17,6 +18,7 @@ const signup = () => {
     .then((response) => {
       console.log("response.data", response.data);
       message.value = response.data.message;
+      router.push({ name: "login" });
     })
     .catch((error) => {
       console.error("Error:", error);

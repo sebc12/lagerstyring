@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import axios from "axios";
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Menu from "@/components/Menu.vue";
 
@@ -28,7 +28,7 @@ interface Product {
   Color: string;
   Storage: number;
   details: ProductDetails[];
-  inventory: Inventory;
+  inventory: Inventory[];
 }
 
 const isModalOpen = ref(false);
@@ -82,6 +82,7 @@ const search = () => {
 <template>
   <div class="flex w-screen lg:w-full">
     <Sidebar />
+
     <div class="py-8 lg:py-0 m-auto w-full px-3 lg:w-4/5">
       <div class="flex mb-16 lg:pt-10">
         <Menu class="flex items-center lg:hidden" />
@@ -92,29 +93,29 @@ const search = () => {
 
       <div class="border py-5">
         <div class="flex flex-col mb-16 m-auto lg:w-2/4">
-          <div class="flex flex-col mb-5 px-2">
+          <div class="flex flex-col mb-5 px-2 gap-2">
             <div class="flex flex-col">
-              <label for="id">id</label>
+              <label class="font-semibold">id</label>
               <input
                 v-model="searchIdQuery"
                 type="text"
-                placeholder="søg"
-                class="border border-black p-2 placeholder:font-semibold placeholder:text-black"
+                placeholder="ID"
+                class="border border-black p-2 placeholder:text-black"
               />
             </div>
-            <label for="Name">Name</label>
+            <label class="font-semibold">Name</label>
             <input
               v-model="searchNameQuery"
               type="text"
-              placeholder="søg"
-              class="border border-black p-2 placeholder:font-semibold placeholder:text-black"
+              placeholder="Name"
+              class="border border-black p-2 placeholder:text-black"
             />
-            <label for="Serialnumber">Serial Number</label>
+            <label class="font-semibold">Serial Number</label>
             <input
               v-model="searchSnQuery"
               type="text"
-              placeholder="søg"
-              class="border border-black p-2 placeholder:font-semibold placeholder:text-black"
+              placeholder="Serial Number"
+              class="border border-black p-2 placeholder:text-black"
             />
           </div>
 
@@ -122,7 +123,7 @@ const search = () => {
             @click="search"
             class="border rounded-3xl w-2/4 p-2 lg:w-1/5 lg:h-10 m-auto bg-green-500"
           >
-            Søg
+            Search
           </button>
           <p v-if="message.error" class="text-[#FC3193] m-auto">
             Produkt ikke fundet
@@ -183,13 +184,7 @@ const search = () => {
                             </p>
                           </div>
 
-                          <!-- Loop through details to display Serial Numbers and Inventory details -->
-                          <div
-                            v-if="
-                              selectedProduct.details &&
-                              selectedProduct.details.length > 0
-                            "
-                          >
+                          <div v-if="selectedProduct.details">
                             <div
                               class="flex justify-center gap-10 mb-5 text-2xl"
                               v-for="detail in selectedProduct.details"
@@ -209,27 +204,16 @@ const search = () => {
                           </div>
                           <div
                             v-else
+                            v-for="inventory in selectedProduct.inventory"
                             class="flex justify-center gap-10 mb-5 text-2xl"
                           >
-                            <!-- If there are no details, display the location from the main product -->
                             <p>
                               Location:
-                              {{
-                                selectedProduct.inventory &&
-                                selectedProduct.inventory.location
-                                  ? selectedProduct.inventory.location
-                                      .LocationName
-                                  : "N/A"
-                              }}
+                              {{ inventory.location.LocationName }}
                             </p>
                             <p>
                               Quantity:
-                              {{
-                                selectedProduct.inventory &&
-                                selectedProduct.inventory.Quantity
-                                  ? selectedProduct.inventory.Quantity
-                                  : "N/A"
-                              }}
+                              {{ inventory.Quantity }}
                             </p>
                           </div>
                         </div>

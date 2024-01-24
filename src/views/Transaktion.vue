@@ -91,7 +91,7 @@ const transaktion = () => {
       <div class="flex">
         <Menu class="flex items-center lg:hidden" />
         <h1 class="m-auto text-3xl font-semibold flex justify-center">
-          Transaction
+          Transfer
         </h1>
       </div>
       <form class="flex flex-col border py-5 px-2 mt-16 lg:w-3/4 m-auto gap-2">

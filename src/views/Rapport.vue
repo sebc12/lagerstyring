@@ -9,15 +9,15 @@ interface details {
   SerialNumber: string;
 }
 
-interface Product {
+interface product {
   ProductID: number;
-  SerialNumber: string;
+  SerialNumberID: number;
   LocationID: number;
   Quantity: number;
   details: details;
 }
 
-const products = ref<Product[] | null>(null);
+const products = ref<product[] | null>(null);
 
 const getReport = () => {
   axios
@@ -37,13 +37,13 @@ const getReport = () => {
       <div class="flex pt-10">
         <Menu class="flex items-center lg:hidden" />
         <h1 class="m-auto text-3xl font-semibold flex justify-center">
-          Create Product
+          Get Report
         </h1>
       </div>
       <div class="flex justify-center mt-24 mb-24">
         <button
           @click="getReport"
-          class="border rounded-2xl p-2 px-4 bg-green-500"
+          class="border rounded-3xl p-2 px-4 bg-green-500"
         >
           Get Report
         </button>
